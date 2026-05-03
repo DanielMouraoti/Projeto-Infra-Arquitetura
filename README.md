@@ -1,24 +1,36 @@
-# 🌐 Projeto de Infraestrutura Física Corporativa
+# 🌐 Projeto de Arquitetura e Topologia Lógica de Rede
 
-![Diagrama de Infraestrutura](./Infraestrutura_Física_Atualizado.drawio.png)
-Este repositório contém a documentação da infraestrutura física de rede de uma unidade corporativa. O objetivo é fornecer uma visão clara da distribuição de ativos, setores e estações de trabalho.
+![Topologia Lógica da Rede](./mapa-logico.png)
 
-## 🚀 Estrutura do Projeto
+Este repositório contém a documentação da arquitetura lógica de rede de uma unidade corporativa. O objetivo deste projeto foi evoluir de um mapeamento físico tradicional para uma topologia lógica estruturada, focada em escalabilidade, segurança e gerenciamento eficiente de tráfego.
 
-O diagrama foi desenvolvido utilizando o **draw.io** e foca nos seguintes pilares:
+## 🚀 Estrutura e Arquitetura do Projeto
 
-* **Segmentação por Departamentos**: Divisão visual entre Infraestrutura, Desenvolvimento, Negócios, Administrativo e Diretoria.
-* **Segurança e Anonimato**: Todos os nomes de colaboradores reais foram substituídos por figuras históricas da ciência (ex: Newton, Tesla, Lovelace) para fins de portfólio e privacidade.
-* **Redundância de Link**: Mapeamento de dois provedores de internet (Vivo e NET) para garantir alta disponibilidade.
-* **Gestão de Ativos**: Identificação única de cada estação através de IDs de usuário (ex: Usr19, Usr06).
+O diagrama foi reestruturado adotando a cultura de **Infraestrutura como Código (IaC)** utilizando **PlantUML**, permitindo o versionamento contínuo do mapa da rede. Os principais pilares desta arquitetura são:
+
+* **Core & Borda (Edge):** Implementação de um Firewall/Edge Router centralizando a entrada de dados, com redundância de links (Multi-WAN: Vivo e NET) garantindo Alta Disponibilidade (HA).
+* **Segmentação Lógica (VLANs):** Substituição do mapeamento puramente geográfico por zonas de segurança lógicas. A rede foi dividida em VLANs dedicadas (Infra, Negócios, Dev, Diretoria, ESG, Comercial e Administrativo) para isolar o tráfego e aumentar a segurança.
+* **Hierarquia de Rede:** Estruturação clara do fluxo de dados: Internet -> Firewall -> Core Switch (Rack Principal) -> Switches de Acesso (Setores).
+* **Segurança e Anonimato:** Os nomes dos colaboradores (Hosts) foram substituídos por pioneiros da ciência e tecnologia (ex: Newton, Lovelace, Turing) garantindo a privacidade dos dados para exibição em portfólio.
 
 ## 🛠️ Ativos Mapeados
-* **Switches Layer 2**: Interconexão dos dispositivos finais nos setores.
-* **Servidor Dedicado**: Centralização de serviços e dados da unidade.
-* **Modems/Gateways**: Terminação dos links de fibra óptica.
-* **Periféricos**: Impressoras e estações rotativas para estagiários.
 
-## 📈 Evolução (Roadmap)
-- [x] Mapeamento Físico e Inventário.
-- [ ] Diagrama Lógico (IPs, VLANs e Conexões).
-- [ ] Documentação de Roteamento e Firewall.
+* **Borda:** Modems de Operadora (Vivo/NET) e Firewall central.
+* **Rack Principal (Core):** Switch Core 24/48 Portas e Servidores de Teste/VMs.
+* **Acesso (Layer 2):** Switches departamentais interligando os clusters de usuários.
+* **VLANs Mapeadas:**
+  * VLAN 10 - Infraestrutura
+  * VLAN 20 - Negócios
+  * VLAN 30 - Desenvolvimento
+  * VLAN 40 - Diretoria
+  * VLAN 50 - ESG
+  * VLAN 60 - Comercial
+  * VLAN 70 - Administrativo
+
+## 📈 Roadmap de Evolução
+
+- [x] Mapeamento Físico e Inventário Visual.
+- [x] Migração para Infraestrutura como Código (PlantUML) e Topologia Lógica.
+- [x] Segmentação de rede através de VLANs.
+- [ ] Definição do plano de Endereçamento IP (Sub-redes e CIDR).
+- [ ] Documentação das regras de Firewall (Inbound/Outbound) e Políticas de Roteamento.
