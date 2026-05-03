@@ -1,0 +1,117 @@
+@startuml
+!theme plain
+top to bottom direction
+
+package "Internet" {
+    [Link NET] as NET
+    [Link VIVO] as VIVO
+}
+
+[Firewall / Edge Router\nFailover Multi-WAN] as FW
+
+package "Rack Principal" {
+    [Core Switch 24/48 Portas] as CORE
+    [Servidores de Teste / VMs] as SRV_TESTE
+}
+
+NET --> FW
+VIVO --> FW
+FW --> CORE
+CORE --> SRV_TESTE
+
+[Switch - Setor Infra] as SW_INFRA
+[Switch - Setor Negócios] as SW_NEG
+[Switch - Setor Dev] as SW_DEV
+[Switch - Corporativo] as SW_CORP
+
+CORE ==> SW_INFRA
+CORE ==> SW_NEG
+CORE ==> SW_DEV
+CORE ==> SW_CORP
+
+package "VLAN 10 - Infra (4 Hosts)" {
+    [Newton] as H_NEWTON
+    [Tesla] as H_TESLA
+    [Einstein] as H_EINSTEIN
+    [Turing] as H_TURING
+}
+SW_INFRA --> H_NEWTON
+SW_INFRA --> H_TESLA
+SW_INFRA --> H_EINSTEIN
+SW_INFRA --> H_TURING
+
+package "VLAN 20 - Negócios (10 Hosts)" {
+    [Rosalind] as H_ROSALIND
+    [Galliel] as H_GALLIEL
+    [Meucci] as H_MEUCCI
+    [Pasteur] as H_PASTEUR
+    [Bohr] as H_BOHR
+    [Franklin] as H_FRANKLIN
+    [Linus] as H_LINUS
+    [Fibonacci] as H_FIBONACCI
+    [Fleming] as H_FLEMING
+    [Bardeen] as H_BARDEEN
+}
+SW_NEG --> H_ROSALIND
+SW_NEG --> H_GALLIEL
+SW_NEG --> H_MEUCCI
+SW_NEG --> H_PASTEUR
+SW_NEG --> H_BOHR
+SW_NEG --> H_FRANKLIN
+SW_NEG --> H_LINUS
+SW_NEG --> H_FIBONACCI
+SW_NEG --> H_FLEMING
+SW_NEG --> H_BARDEEN
+
+package "VLAN 30 - Desenvolvimento (8 Hosts)" {
+    [Lovelace] as H_LOVELACE
+    [Darwin] as H_DARWIN
+    [Mandeleeve] as H_MANDELEEVE
+    [Heisenberg] as H_HEISENBERG
+    [Babbage] as H_BABBAGE
+    [Torvalds] as H_TORVALDS
+    [Ritchie] as H_RITCHIE
+    [Berners-Lee] as H_BERNERS
+}
+SW_DEV --> H_LOVELACE
+SW_DEV --> H_DARWIN
+SW_DEV --> H_MANDELEEVE
+SW_DEV --> H_HEISENBERG
+SW_DEV --> H_BABBAGE
+SW_DEV --> H_TORVALDS
+SW_DEV --> H_RITCHIE
+SW_DEV --> H_BERNERS
+
+package "VLAN 40 - Diretoria (1 Host)" {
+    [Maxwell] as H_MAXWELL
+}
+SW_CORP --> H_MAXWELL
+
+package "VLAN 50 - ESG (2 Hosts)" {
+    [Feynman] as H_FEYNMAN
+    [Gregor] as H_GREGOR
+}
+SW_CORP --> H_FEYNMAN
+SW_CORP --> H_GREGOR
+
+package "VLAN 60 - Comercial (2 Hosts)" {
+    [da Vinci] as H_DAVINCI
+    [Kepler] as H_KEPLER
+}
+SW_CORP --> H_DAVINCI
+SW_CORP --> H_KEPLER
+
+package "VLAN 70 - Administrativo (5 Hosts)" {
+    [Hawking (Financeiro)] as H_HAWKING
+    [Pascal (Financeiro)] as H_PASCAL
+    [Faraday (RH)] as H_FARADAY
+    [Copérnico (RH)] as H_COPERNICO
+    [Lamar (Jurídico)] as H_LAMAR
+}
+SW_CORP --> H_HAWKING
+SW_CORP --> H_PASCAL
+SW_CORP --> H_FARADAY
+SW_CORP --> H_COPERNICO
+SW_CORP --> H_LAMAR
+
+@enduml
