@@ -1,7 +1,6 @@
 # 🌐 Projeto de Infraestrutura Física Corporativa
 
-![Diagrama de Infraestrutura](./Estrutura-Física.svg)
-
+![Diagrama de Infraestrutura](./Infraestrutura_Física_Atualizado.drawio.png)
 Este repositório contém a documentação da infraestrutura física de rede de uma unidade corporativa. O objetivo é fornecer uma visão clara da distribuição de ativos, setores e estações de trabalho.
 
 ## 🚀 Estrutura do Projeto
